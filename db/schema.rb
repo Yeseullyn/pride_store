@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_09_190853) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_09_203608) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -48,4 +48,54 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_190853) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "full_name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "address"
+    t.string "province"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price_at_purchase"
+    t.integer "order_id_id", null: false
+    t.integer "product_id_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id_id"], name: "index_order_items_on_order_id_id"
+    t.index ["product_id_id"], name: "index_order_items_on_product_id_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "total_amount"
+    t.integer "customer_id_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id_id"], name: "index_orders_on_customer_id_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
+    t.integer "stock_quantity"
+    t.integer "category_id_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id_id"], name: "index_products_on_category_id_id"
+  end
+
+  add_foreign_key "order_items", "order_ids"
+  add_foreign_key "order_items", "product_ids"
+  add_foreign_key "orders", "customer_ids"
+  add_foreign_key "products", "category_ids"
 end
