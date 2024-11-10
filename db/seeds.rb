@@ -10,7 +10,7 @@ categories.each { |name| Category.create(name: name) }
     name: Faker::Commerce.product_name,
     price: Faker::Commerce.price(range: 10..100),
     stock_quantity: rand(1..50),
-    category_id: Category.all.sample
+    category: Category.all.sample
   )
 end
 

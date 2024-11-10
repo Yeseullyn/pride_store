@@ -68,34 +68,34 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_203608) do
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "price_at_purchase"
-    t.integer "order_id_id", null: false
-    t.integer "product_id_id", null: false
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id_id"], name: "index_order_items_on_order_id_id"
-    t.index ["product_id_id"], name: "index_order_items_on_product_id_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.decimal "total_amount"
-    t.integer "customer_id_id", null: false
+    t.integer "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id_id"], name: "index_orders_on_customer_id_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
     t.integer "stock_quantity"
-    t.integer "category_id_id", null: false
+    t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id_id"], name: "index_products_on_category_id_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  add_foreign_key "order_items", "order_ids"
-  add_foreign_key "order_items", "product_ids"
-  add_foreign_key "orders", "customer_ids"
-  add_foreign_key "products", "category_ids"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "products", "categories"
 end
