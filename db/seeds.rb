@@ -1,11 +1,14 @@
 require 'faker'
 
+Product.destroy_all
+Category.destroy_all
+
 # Create categories
-categories = %w[Clothing Accessories Home_Decor]
+categories = %w[Clothing Accessories Home_Decor Gift]
 categories.each { |name| Category.create(name: name) }
 
 # Create products with random data
-10.times do
+100.times do
   Product.create(
     name: Faker::Commerce.product_name,
     price: Faker::Commerce.price(range: 10..100),
@@ -14,4 +17,5 @@ categories.each { |name| Category.create(name: name) }
   )
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.delete_all
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
