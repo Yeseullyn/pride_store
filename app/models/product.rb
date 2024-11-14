@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   # Associations
   belongs_to :category
   has_many :order_items
+  has_one_attached :image
 
   # Validations
   validates :name, presence: true, uniqueness: true
@@ -15,6 +16,6 @@ class Product < ApplicationRecord
 
   # Specify the attributes that Ransack can search
   def self.ransackable_attributes(auth_object = nil)
-    ["category_id", "created_at", "id", "name", "price", "stock_quantity", "updated_at"]
+    ["category_id", "created_at", "id", "name", "price", "stock_quantity", "updated_at", "description"]
   end
 end

@@ -13,7 +13,8 @@ categories.each { |name| Category.create(name: name) }
     name: Faker::Commerce.product_name,
     price: Faker::Commerce.price(range: 10..100),
     stock_quantity: rand(1..50),
-    category: Category.all.sample
+    category: Category.all.sample,
+    description: "#{Faker::Commerce.material} #{Faker::Commerce.product_name} - #{Faker::Marketing.buzzwords}. Perfect for #{Faker::Commerce.department(max: 1)}."
   )
 end
 
