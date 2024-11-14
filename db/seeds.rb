@@ -20,3 +20,7 @@ end
 
 AdminUser.delete_all
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+# db/seeds.rb
+Page.create(title: 'About', content: 'Rainbow united was founded in 2021 as a nonprofit organization to advancing LGBTQ+ rights. It has grown into a successful online business selling pride related merchandise to celebrate and support the LGBTQ+ community across Canada.')
+Page.create(title: 'Contact', content: 'For inquiries, reach out to us at info@rainbowunited.com or call 204-123-4567.')
